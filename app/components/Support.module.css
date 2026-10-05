@@ -1,0 +1,53 @@
+.section {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(44px, 8vh, 88px) var(--gutter) clamp(52px, 9vh, 104px);
+  text-align: center;
+}
+
+.rule {
+  width: 100%;
+  height: 1px;
+  margin: 0 auto clamp(36px, 6vh, 64px);
+  background: var(--rule);
+}
+
+.ask {
+  margin: 0 0 14px;
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.15;
+  color: var(--cream);
+}
+
+.mail {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: clamp(0.8125rem, 2.2vw, 0.9375rem);
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  text-decoration: none;
+  /* The underline sits low and thin, so the address reads as a written
+     note rather than a button */
+  border-bottom: 1px solid rgba(227, 178, 60, 0.4);
+  padding-bottom: 3px;
+  overflow-wrap: anywhere;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.mail:hover {
+  color: var(--cream);
+  border-bottom-color: var(--cream);
+}
+
+.mail:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.aside {
+  margin: 20px 0 0;
+  transform: rotate(-1.2deg);
+}

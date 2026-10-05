@@ -1,0 +1,19 @@
+.page { position: relative; z-index: 1; }
+
+/* ---------- Footer ---------- */
+
+.footer {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 26px var(--gutter) calc(40px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  justify-content: space-between;
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(254, 252, 240, 0.42);
+}

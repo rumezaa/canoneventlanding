@@ -1,0 +1,408 @@
+/* ============================================================
+   Hero — static banner with a one-shot entrance.
+   The wordmark glitches in (RGB split + slice jitter) and settles
+   clean; everything else fades up around it on a stagger.
+   ============================================================ */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding:
+    calc(56px + env(safe-area-inset-top, 0px))
+    var(--gutter)
+    72px;
+  text-align: center;
+}
+
+/* ---------- Backdrop ---------- */
+
+.frame,
+.frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.frame img {
+  object-fit: cover;
+  object-position: 50% 35%;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 50% 38%,
+      transparent 0%,
+      rgba(12, 16, 9, 0.45) 70%,
+      rgba(12, 16, 9, 0.78) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(14, 19, 11, 0.62) 0%,
+      rgba(14, 19, 11, 0.5) 38%,
+      rgba(20, 26, 16, 0.8) 78%,
+      rgba(27, 35, 22, 0.9) 100%
+    );
+}
+
+.bloom {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  z-index: 1;
+  width: min(1100px, 130vw);
+  aspect-ratio: 1 / 1;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(227, 178, 60, 0.26) 0%,
+    rgba(227, 178, 60, 0.1) 32%,
+    transparent 68%
+  );
+}
+
+/* The same ruled grid the rest of the page sits on. The global .paper
+   layer is behind the hero's opaque backdrop, so without this the texture
+   would start abruptly at the hero's bottom edge. */
+.texture {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right,  rgba(254, 252, 240, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(254, 252, 240, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  /* Strongest low in the frame, so it meets the section below at the same
+     weight and fades out into the light up top. */
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 42%, #000 78%, #000 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 42%, #000 78%, #000 100%);
+}
+
+/* A last soft step to flat --green-deep, so the hero's bottom edge and the
+   page background are the exact same colour where they meet. */
+.hem {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 32vh;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 0%, var(--green-deep) 92%);
+}
+
+/* ---------- Entrance stagger ---------- */
+
+.rise {
+  opacity: 0;
+  animation: rise 700ms cubic-bezier(0.2, 0.75, 0.3, 1) forwards;
+}
+
+.d1 { animation-delay: 120ms; }
+.d2 { animation-delay: 1180ms; }
+.d3 { animation-delay: 1320ms; }
+.d4 { animation-delay: 1460ms; }
+.d5 { animation-delay: 1620ms; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------- Logo ---------- */
+
+.mark {
+  position: relative;
+  z-index: 2;
+  width: clamp(120px, 16vw, 168px);
+  aspect-ratio: 1 / 1;
+  flex: none;
+}
+
+.face { position: absolute; }
+.face img { display: block; width: 100%; height: 100%; }
+
+.faceTop   { inset: 20%    27.65% 53.22% 26.03%; }
+.faceRight { inset: 36.62% 24.91% 19.95% 49.29%; }
+.faceLeft  { inset: 36.6%  52.7%  20.2%  23.9%;  }
+
+/* ---------- The wordmark, glitching in ---------- */
+
+.wordmarkWrap {
+  position: relative;
+  z-index: 2;
+}
+
+.wordmark {
+  position: relative;
+  margin: 0;
+  font-family: var(--font-wordmark), var(--font-display), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2.6rem, 8.6vw, 6rem);
+  line-height: 1.04;
+  color: var(--cream);
+  opacity: 0;
+  animation: settle 900ms steps(1, end) 360ms forwards;
+}
+
+/* The base type snaps through a few opacity/offset frames, then holds */
+@keyframes settle {
+  0%   { opacity: 0;    transform: translate3d(0, 0, 0); }
+  12%  { opacity: 0.55; transform: translate3d(-3px, 1px, 0); }
+  18%  { opacity: 0;    transform: translate3d(0, 0, 0); }
+  26%  { opacity: 0.9;  transform: translate3d(2px, -1px, 0); }
+  34%  { opacity: 0.4;  transform: translate3d(-2px, 0, 0); }
+  44%  { opacity: 1;    transform: translate3d(1px, 0, 0); }
+  56%  { opacity: 0.8;  transform: translate3d(-1px, 1px, 0); }
+  70%  { opacity: 1;    transform: translate3d(0, 0, 0); }
+  100% { opacity: 1;    transform: translate3d(0, 0, 0); }
+}
+
+/* Two offset colour copies ride along, then disappear once it settles.
+   Gold and teal rather than the usual red/cyan, so it stays in palette. */
+.wordmark::before,
+.wordmark::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.wordmark::before {
+  color: var(--gold);
+  animation: splitA 900ms steps(1, end) 360ms forwards;
+}
+
+.wordmark::after {
+  color: #6FD8C0;
+  animation: splitB 900ms steps(1, end) 360ms forwards;
+}
+
+@keyframes splitA {
+  0%   { opacity: 0;    transform: translate3d(0, 0, 0);   clip-path: inset(0 0 0 0); }
+  14%  { opacity: 0.85; transform: translate3d(-8px, 0, 0); clip-path: inset(12% 0 58% 0); }
+  24%  { opacity: 0.7;  transform: translate3d(6px, 0, 0);  clip-path: inset(62% 0 14% 0); }
+  38%  { opacity: 0.8;  transform: translate3d(-5px, 0, 0); clip-path: inset(34% 0 40% 0); }
+  52%  { opacity: 0.5;  transform: translate3d(3px, 0, 0);  clip-path: inset(6% 0 76% 0); }
+  68%  { opacity: 0.25; transform: translate3d(-2px, 0, 0); clip-path: inset(48% 0 28% 0); }
+  82%  { opacity: 0;    transform: translate3d(0, 0, 0);   clip-path: inset(0 0 0 0); }
+  100% { opacity: 0; }
+}
+
+@keyframes splitB {
+  0%   { opacity: 0;    transform: translate3d(0, 0, 0);   clip-path: inset(0 0 0 0); }
+  14%  { opacity: 0.7;  transform: translate3d(7px, 0, 0);  clip-path: inset(58% 0 16% 0); }
+  24%  { opacity: 0.6;  transform: translate3d(-6px, 0, 0); clip-path: inset(10% 0 64% 0); }
+  38%  { opacity: 0.7;  transform: translate3d(5px, 0, 0);  clip-path: inset(70% 0 8% 0); }
+  52%  { opacity: 0.4;  transform: translate3d(-3px, 0, 0); clip-path: inset(26% 0 52% 0); }
+  68%  { opacity: 0.2;  transform: translate3d(2px, 0, 0);  clip-path: inset(40% 0 44% 0); }
+  82%  { opacity: 0;    transform: translate3d(0, 0, 0);   clip-path: inset(0 0 0 0); }
+  100% { opacity: 0; }
+}
+
+/* A scanline wipe that passes once across the wordmark as it resolves */
+.scan {
+  position: absolute;
+  left: -6%;
+  right: -6%;
+  top: 0;
+  height: 14%;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 244, 214, 0.22),
+    transparent
+  );
+  animation: scan 820ms ease-out 420ms forwards;
+}
+
+@keyframes scan {
+  0%   { opacity: 0;    transform: translateY(-40%); }
+  18%  { opacity: 0.9; }
+  100% { opacity: 0;    transform: translateY(760%); }
+}
+
+/* ---------- Supporting copy ---------- */
+
+.eyebrow { position: relative; z-index: 2; }
+
+.meta {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 14px;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(254, 252, 240, 0.86);
+}
+
+.dot { color: var(--gold); }
+
+.aside {
+  position: relative;
+  z-index: 2;
+  max-width: 30ch;
+  margin: 2px 0 0;
+  transform: rotate(-2.2deg);
+}
+
+.rise.aside { animation-name: riseTilted; }
+
+@keyframes riseTilted {
+  from { opacity: 0; transform: rotate(-2.2deg) translateY(14px); }
+  to   { opacity: 1; transform: rotate(-2.2deg); }
+}
+
+/* ---------- Buttons ---------- */
+
+.actions {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 15px 30px;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.3, 1),
+              background-color 180ms ease, color 180ms ease;
+}
+
+.primary { background: var(--gold); color: #241C08; }
+
+.ghost {
+  background: rgba(16, 21, 13, 0.4);
+  color: var(--cream);
+  border-color: rgba(254, 252, 240, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+@media (hover: hover) {
+  .btn:hover { transform: translateY(-2px); }
+  .ghost:hover { background: rgba(254, 252, 240, 0.1); border-color: var(--cream); }
+}
+
+.btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+@media (max-width: 440px) {
+  .actions { flex-direction: column; width: 100%; max-width: 300px; }
+  .btn { width: 100%; }
+}
+
+/* ---------- Stars ---------- */
+
+.star {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.85;
+  animation: twinkle 4.5s ease-in-out infinite;
+}
+
+.star img { display: block; width: 100%; height: auto; }
+
+.starA { top: 17%; left: 12%; width: 46px; animation-delay: -0.2s; }
+.starB { top: 30%; right: 11%; width: 30px; animation-delay: -1.7s; }
+.starC { top: 64%; left: 20%; width: 22px; animation-delay: -3.1s; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.9)  rotate(0deg); }
+  50%      { opacity: 0.95; transform: scale(1.06) rotate(8deg); }
+}
+
+@media (max-width: 720px) {
+  .starA { width: 30px; left: 6%; }
+  .starB { width: 22px; right: 6%; }
+  .starC { display: none; }
+}
+
+/* ---------- Scroll cue ---------- */
+
+.cue {
+  position: absolute;
+  bottom: calc(26px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 0.5625rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(254, 252, 240, 0.4);
+  pointer-events: none;
+}
+
+.rise.cue { animation-name: riseCentred; }
+
+@keyframes riseCentred {
+  from { opacity: 0; transform: translateX(-50%) translateY(14px); }
+  to   { opacity: 1; transform: translateX(-50%); }
+}
+
+.cue:not(.rise) { transform: translateX(-50%); }
+
+.cueLine {
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
+
+/* ---------- Reduced motion: no glitch, just arrive ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .wordmark {
+    opacity: 1;
+    animation: none;
+  }
+  .wordmark::before,
+  .wordmark::after,
+  .scan { display: none; }
+  .rise { animation-duration: 1ms; animation-delay: 0ms; }
+  .star { animation: none; opacity: 0.7; }
+}

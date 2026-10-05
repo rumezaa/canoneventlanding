@@ -1,0 +1,106 @@
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(28px, 5vh, 52px) var(--gutter) 0;
+}
+
+.band {
+  padding-top: 40px;
+  border-top: 1px solid var(--rule);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 44px;
+  margin-bottom: 34px;
+}
+
+.partners {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--cream);
+  opacity: 0.74;
+}
+
+.partnerLink {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(254, 252, 240, 0.25);
+  padding-bottom: 2px;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.partnerLink:hover {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+.partnerLink:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.sep {
+  margin: 0 10px;
+  color: var(--gold);
+  opacity: 0.8;
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px 44px;
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 22px 44px;
+}
+
+.slot {
+  position: relative;
+  height: 30px;
+  flex: none;
+  overflow: hidden;
+  /* Source logos are dark marks on white. Knocking them out to a flat
+     cream keeps the row even instead of six competing brand colours. */
+  filter: brightness(0) invert(1);
+  opacity: 0.66;
+  transition: opacity 200ms ease;
+}
+
+.slot:hover { opacity: 1; }
+
+.fitted {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.cropped {
+  position: absolute;
+  max-width: none;
+}
+
+@media (max-width: 640px) {
+  .inner { gap: 20px; }
+  .logos { gap: 18px 30px; }
+  .slot { transform: scale(0.84); transform-origin: left center; }
+}
