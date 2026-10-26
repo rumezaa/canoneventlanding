@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Canon</title>
+<meta name="description" content="The Canon: a film festival, night market and creator gathering. Sunday, Nov 1, 2026 at Studio Bell, Calgary.">
+<style>html,body{margin:0}</style>
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Instrument+Serif&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: postcard hero on a blurred green field → invitation copy → a stack of three file folders (click a tab to pull it forward) → projector story → dark footer. Built from the Figma "Desktop - 1" frame. */
+:root{
+  --paper:#E2DECC; --card:#F7F7F7; --ink:#291100; --forest:#153528; --olive:#4F5D2F; --green-head:#315D4B;
+  --label:#775234; --ochre:rgba(196,154,80,.8);
+  --f-yellow:#D4AD4B; --f-green:#2E4433; --f-red:#632203;
+  --display:"Caprasimo", "Cooper Black", Georgia, serif;
+  --serif:"Instrument Serif", "Times New Roman", serif;
+  --sans:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pc-max:1040px; --cube:300px; --lead-max:672px; --story-max:680px; --folders-max:1066px; --peek:6px;
+  --polaroid-max:394px; --desc-max:470px; --fold-pad:86px; --tab-size:27px; --room-max:650px;
+  --rays-h:760px; --cam-w:29.65%; --cam-x:65%; --cam-y:-29.5%; --logo-scale:1;
+  --gutter-l:max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;overflow-x:hidden}
+img{display:block;max-width:100%}
+.wrap{padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.inner{max-width:1066px;margin:0 auto}
+.acts .inner{max-width:var(--folders-max)}
+a,button{font:inherit}
+:focus-visible{outline:3px solid #C49A50;outline-offset:3px}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;background:#3c4a32 url(assets/hero-bg.jpg) center/cover;padding-block:clamp(48px,9vw,130px) clamp(56px,7vw,90px);overflow:hidden}
+.postcard{position:relative;max-width:var(--pc-max);margin:0 auto;container-type:inline-size;filter:drop-shadow(0 18px 30px rgba(20,25,10,.35))}
+/* everything on the card scales with the card's own width (cqw), so the layout stays the same from desktop to phone */
+.postcard .paper{position:relative;background:#e9e5d8 url(assets/paper.jpg) center/cover;
+  display:grid;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr);gap:4.2cqw;
+  padding:6.7cqw 6.7cqw 9.6cqw;
+  -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 3.1cqw) no-repeat, radial-gradient(ellipse 2.5cqw 2.3cqw at 50% 100%,#0000 96%,#000) bottom/ 9cqw 3.1cqw repeat-x;
+          mask:linear-gradient(#000 0 0) top/100% calc(100% - 3.1cqw) no-repeat, radial-gradient(ellipse 2.5cqw 2.3cqw at 50% 100%,#0000 96%,#000) bottom/ 9cqw 3.1cqw repeat-x}
+.postcard .tape{position:absolute;left:50%;top:-3.3cqw;width:23.5cqw;transform:translateX(-45%);mix-blend-mode:multiply;z-index:2;pointer-events:none}
+.pc-left{display:flex;flex-direction:column;gap:5.8cqw;min-width:0}
+.pc-left .hello{font:500 max(11px,2.5cqw)/1.2 var(--sans);color:var(--forest);margin:0}
+.pc-left .cube{width:min(var(--cube),100%);opacity:.95;align-self:center;margin-block:auto}
+.divider{background:var(--ink);opacity:.8;width:1px;align-self:stretch}
+.pc-right{display:flex;flex-direction:column;gap:2.7cqw;min-width:0}
+.addr{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2.5cqw 1.5cqw;align-items:baseline;margin:0}
+.addr dt{font:max(10px,2.5cqw)/1.2 var(--display);color:var(--olive);text-transform:uppercase;text-align:right}
+.addr dd{margin:0;font:500 max(10.5px,2.1cqw)/1.65 var(--sans);color:var(--forest)}
+.addr dd span{text-decoration:underline;text-decoration-color:rgba(41,17,0,.55);text-decoration-thickness:1.5px;text-underline-offset:.4em}
+.brewing{font:max(12px,2.7cqw)/1.37 var(--sans);text-align:center;margin:1cqw 0 0;text-wrap:balance}
+.ctas{display:flex;gap:clamp(12px,1.6vw,20px);justify-content:center;flex-wrap:wrap}
+.ctas-out{display:none;margin-top:22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 clamp(22px,3cqw,40px);border-radius:26px;
+  text-decoration:none;white-space:nowrap;font:clamp(15px,1.9cqw,20px) var(--sans);letter-spacing:.02em;transition:transform .2s, box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(41,17,0,.2)}
+.btn.rsvp{background:var(--ochre);border:1px solid var(--ink);color:var(--ink)}
+.btn.work{background:var(--ink);border:.8px solid var(--paper);color:var(--paper);font-size:clamp(14px,1.6cqw,17px)}
+.ctas-out .btn.rsvp{background:#C49A50}
+@container (max-width:620px){
+  .paper .ctas{display:none}
+  .ctas-out{display:flex}
+  .ctas-out .btn{flex:1 1 0;padding:0 12px}
+  .postcard .paper{grid-template-columns:minmax(0,.85fr) 1px minmax(0,1.15fr);padding-bottom:11cqw}
+}
+
+/* ---------- INVITE ---------- */
+.invite{padding-block:clamp(56px,8vw,110px) clamp(48px,6vw,80px);text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font:clamp(24px,2.4vw,30px)/1.4 var(--serif);color:var(--ink);margin:0}
+.eyebrow img{width:auto;height:clamp(40px,4.4vw,64px)}
+.invite h1{font:clamp(27px,3.1vw,36px)/1.1 var(--display);color:var(--green-head);margin:14px 0 clamp(26px,3.6vw,40px);text-wrap:balance}
+.invite h1 .makers{display:inline-block;height:1.15em;width:auto;vertical-align:-.25em;margin:0 .1em}
+.lead{max-width:var(--lead-max);margin:0 auto;font:600 clamp(18px,1.9vw,22px)/1.6 var(--sans)}
+.story{max-width:var(--story-max);margin:clamp(20px,2.6vw,30px) auto 0;text-align:left;font:clamp(17px,1.75vw,22px)/1.84 var(--sans)}
+.story p{margin:0}
+
+/* ---------- FOLDERS ---------- */
+.acts{padding-block:clamp(40px,6vw,90px) clamp(64px,8vw,120px)}
+.acts-head{text-align:center;margin:0 0 clamp(28px,4vw,48px)}
+.acts-head h2{font:clamp(30px,3.4vw,42px)/1.1 var(--serif);margin:0}
+.acts-head p{margin:6px 0 0;font:500 15px var(--sans);color:var(--label)}
+.cabinet{display:grid;padding-top:56px}
+.folder{grid-area:1/1;position:relative;display:flex;flex-direction:column;--lift:0px;transform:translateY(var(--lift));transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .35s}
+.folder[data-pos="1"]{--lift:calc(var(--peek) * -1);filter:brightness(.9)}
+.folder[data-pos="2"]{--lift:calc(var(--peek) * -2);filter:brightness(.82)}
+.folder.pull{animation:pull .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes pull{0%{transform:translateY(-46px)}100%{transform:translateY(0)}}
+.folder .tab{position:absolute;bottom:100%;height:46px;border:0;border-radius:12px 12px 0 0;cursor:pointer;padding:0 14px;
+  background:var(--c) var(--tex) top left/1066px auto;color:var(--tabtext);font:min(var(--tab-size),2.2vw + 6px)/1 var(--serif);white-space:nowrap;
+  display:flex;align-items:center;justify-content:center;transition:filter .2s}
+.folder .tab:hover{filter:brightness(1.08)}
+.folder[data-pos="0"] .tab{cursor:default}
+.f-yellow .tab{left:0;width:32.7%}
+.f-green  .tab{left:33.7%;width:32.7%}
+.f-red    .tab{right:0;width:32.7%}
+.tab .short{display:none}
+.body{position:relative;background:var(--c) var(--tex) center/cover;border-radius:12px;color:var(--fg);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,48px);align-items:start;
+  padding:min(var(--fold-pad),7vw + 20px) clamp(30px,4.5vw,50px) min(var(--fold-pad),6vw + 20px) min(var(--fold-pad),8.5vw);flex:1}
+.f-yellow .body{border-top-left-radius:0}
+.f-red .body{border-top-right-radius:0}
+.body[aria-hidden="true"] > *{visibility:hidden}
+.f-yellow{--c:var(--f-yellow);--tex:url(assets/folder-yellow.jpg);--fg:#000;--title:var(--ink);--tabtext:var(--ink)}
+.f-green{--c:var(--f-green);--tex:url(assets/folder-green.jpg);--fg:var(--paper);--title:var(--paper);--tabtext:var(--paper)}
+.f-red{--c:var(--f-red);--tex:url(assets/folder-red.jpg);--fg:var(--paper);--title:var(--paper);--tabtext:var(--paper)}
+
+.polaroid{position:relative;background:var(--card);border-radius:12px;padding:clamp(18px,2.6vw,30px) clamp(18px,2.6vw,28px) 10px;margin:0;
+  box-shadow:0 2px 4px rgba(0,0,0,.12),0 14px 28px rgba(0,0,0,.18);max-width:var(--polaroid-max);width:100%;justify-self:center;transform:rotate(-1.2deg)}
+.f-green .polaroid{transform:rotate(1deg)}
+.polaroid .photo{width:100%;aspect-ratio:339/232;object-fit:cover;border-radius:4px}
+.polaroid figcaption{font:14px/2 var(--sans);color:#000;text-align:center;margin-top:6px}
+.deco{position:absolute;pointer-events:none}
+.deco.clip{width:33%;left:-17%;top:-19%}
+.deco.binder{width:36%;left:32%;top:-34%}
+.deco.tape{width:45%;left:27%;top:-11%;transform:scaleX(-1);mix-blend-mode:multiply}
+
+.text{min-width:0;padding-top:4px}
+.text h3{font:clamp(20px,2.2vw,24px)/1.2 var(--display);color:var(--title);margin:0 0 6px}
+.text .desc{font:16px/2 var(--sans);margin:0 0 18px;max-width:var(--desc-max)}
+.info{background:var(--paper);border-radius:4px;padding:20px 26px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 18px;margin:0;width:fit-content;max-width:100%}
+.info dt{font:clamp(17px,1.7vw,20px)/2 var(--display);color:var(--label);text-transform:uppercase;text-align:right}
+.info dd{margin:0;font:clamp(17px,1.7vw,20px)/2 var(--sans);color:var(--ink)}
+
+/* ---------- PROJECTOR ---------- */
+.room{padding-top:clamp(40px,6vw,80px)}
+.room h2{font:clamp(26px,3vw,36px)/1.2 var(--display);color:var(--green-head);margin:0 0 6px;text-wrap:balance}
+.room .copy{max-width:var(--room-max);font:clamp(17px,1.75vw,22px)/2 var(--sans);position:relative;z-index:2}
+.room .copy p{margin:0}
+.room-inner{max-width:var(--folders-max);margin:0 auto}
+.beams{position:relative;margin-top:clamp(32px,5vw,72px)}
+.beams .rays{position:relative;z-index:2;width:100%;height:min(59.8vw, var(--rays-h));object-fit:cover;object-position:50% 0}
+.beams .camera{position:absolute;left:var(--cam-x);width:var(--cam-w);top:0;margin-top:calc(var(--cam-y) * .598);z-index:1;
+  animation:bob 6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px) rotate(-1deg)}}
+
+/* ---------- FOOTER ---------- */
+footer{position:relative;margin-top:-1px;background:var(--ink);color:#d4c04d;padding-block:56px 64px}
+footer h4{font:500 15px var(--sans);letter-spacing:.06em;margin:0 0 18px;text-transform:uppercase}
+.logos{display:flex;flex-wrap:wrap;align-items:center;gap:32px clamp(32px,5vw,72px);margin:0 0 44px;padding:0;list-style:none}
+.logos a{display:inline-block;border-radius:6px;transition:opacity .2s, transform .2s}
+.logos a:hover{opacity:.75;transform:translateY(-2px)}
+.logos img{height:calc(var(--h,40px) * var(--logo-scale) * var(--s,1));width:auto;max-width:100%}
+
+.logos .ph{font:500 15px var(--sans);color:rgba(255,255,255,.75);border:1px dashed rgba(255,255,255,.35);border-radius:6px;padding:12px 16px}
+.footer-meta{border-top:1px solid rgba(212,192,77,.25);padding-top:22px;font:14px var(--sans);color:rgba(226,222,204,.7);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+
+
+/* subtle graph-paper grid on the cream areas (everything between the hero and footer) */
+main{background-color:var(--paper);
+  --nogrid:linear-gradient(rgba(41,17,0,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(41,17,0,.055) 1px,transparent 1px);
+  background-size:24px 24px;background-position:center top}
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:900px){
+  .body{grid-template-columns:1fr;padding-top:72px}
+  .text{padding-top:0}
+  .info{width:100%}
+}
+@media (max-width:640px){
+  :root{--logo-scale:.8}
+  .folder .tab{height:44px;font-size:20px;padding:0 6px}
+  .tab .full{display:none}
+  .tab .short{display:inline}
+  .f-yellow .tab{width:32%} .f-green .tab{left:34%;width:32%} .f-red .tab{width:32%}
+  .cabinet{padding-top:52px}
+  .beams{margin-top:24vw}
+  .info{padding:16px 18px}
+}
+
+/* ---------- LOAD + SCROLL FADE-IN ---------- */
+@keyframes rise-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes tape-in{from{opacity:0;transform:translateX(-45%) translateY(-14px) rotate(-4deg)}to{opacity:1;transform:translateX(-45%)}}
+.hero .postcard{animation:rise-in .6s cubic-bezier(.2,.7,.2,1) both}
+.hero .tape{animation:tape-in .5s .35s cubic-bezier(.2,.7,.2,1) both}
+.pc-left,.pc-right{animation:rise-in .55s cubic-bezier(.2,.7,.2,1) both}
+.pc-left{animation-delay:.2s}.pc-right{animation-delay:.3s}
+.ctas-out{animation:rise-in .5s .45s cubic-bezier(.2,.7,.2,1) both}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (min-width:2000px){.beams .rays{height:auto}.beams .camera{left:55.73%;width:14.83%;margin-top:-7.99%}}
+
+/* ================= REFRESH (body.v2) ================= */
+.topbar,.view-toggle{display:none}
+.v2 .topbar{display:flex;position:sticky;top:env(safe-area-inset-top,0px);z-index:50;align-items:center;justify-content:space-between;gap:16px;
+  padding-block:10px;background:rgba(41,17,0,.92);backdrop-filter:blur(8px);color:var(--paper)}
+.v2 .topbar .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--paper);font:20px var(--display);letter-spacing:.02em}
+.v2 .topbar .brand img{height:34px;width:auto;filter:invert(.92) sepia(.2)}
+.v2 .topbar .meta{font:500 14px var(--sans);opacity:.8;letter-spacing:.04em;text-transform:uppercase}
+.v2 .topbar .btn{min-height:40px;padding:0 20px;font-size:15px;background:#C49A50;border:0;color:var(--ink)}
+.v2 body::after,.v2::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:40;mix-blend-mode:multiply;opacity:.35;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .3  0 0 0 0 .25  0 0 0 0 .18  0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.v2{--edge:max(var(--gutter-l), calc((100% - 1180px) / 2))}
+
+/* intro: dark green block, editorial two-column */
+.v2 .invite{background:var(--f-green);color:var(--paper);text-align:left;
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-areas:"eye eye" "h1 lead" "h1 story";column-gap:clamp(32px,6vw,96px);row-gap:20px;align-items:start;
+  padding:clamp(72px,9vw,140px) var(--edge) clamp(64px,8vw,120px)}
+.v2 .invite .eyebrow{grid-area:eye;color:#d9c48a;font-size:22px}
+.v2 .invite h1{grid-area:h1;color:var(--paper);font-size:clamp(48px,7vw,104px);line-height:.98;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.v2 .invite h1 br{display:none}
+.v2 .invite h1 .makers{height:1.05em;filter:brightness(1.35) saturate(1.2)}
+.v2 .invite .lead{grid-area:lead;margin:0;max-width:none;font:600 20px/1.5 var(--sans);color:var(--paper)}
+.v2 .invite .story{grid-area:story;margin:0;max-width:none;font:17.5px/1.65 var(--sans);color:rgba(226,222,204,.85)}
+.v2 .invite .story p+p{margin-top:12px}
+
+/* acts: folders straddle the green/cream edge */
+.v2 .acts{background:linear-gradient(var(--f-green) 0 calc(2 * clamp(56px,8vw,128px) * .95 + 130px + clamp(60px,9vw,170px)), transparent 0);padding-top:0}
+.v2 .acts .acts-big{color:var(--paper);margin-top:0}
+.v2 .acts .acts-big small{color:#d9c48a}
+.v2 .acts-head{display:none}
+.v2 .acts-big{display:block}
+.acts-big{display:none;font:clamp(56px,8vw,128px)/.95 var(--display);color:var(--ink);margin:clamp(56px,7vw,100px) 0 0;letter-spacing:-.01em}
+.acts-big small{display:block;font:600 14px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--label);margin-bottom:14px}
+.v2 .acts{padding-bottom:clamp(48px,6vw,80px)}
+.v2 .acts .inner{max-width:1180px}
+.v2 .text .desc{line-height:1.65}
+
+/* room: big left heading, tighter copy */
+.v2 .room h2{font:clamp(40px,5.4vw,80px)/1 var(--display);color:var(--green-head);margin-bottom:24px}
+.v2 .room .copy{font:17.5px/1.65 var(--sans);max-width:620px}
+.v2 .room .copy p+p{margin-top:12px}
+.v2 .room-inner{max-width:1180px}
+
+/* toggle */
+.view-toggle{display:inline-flex;position:fixed;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:100;
+  background:#291100;border:1px solid #C49A50;border-radius:99px;padding:4px;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.view-toggle[hidden]{display:none}
+.view-toggle button{border:0;background:none;color:#E2DECC;font:600 13px var(--sans);padding:8px 14px;border-radius:99px;cursor:pointer}
+.view-toggle button[aria-pressed="true"]{background:#E2DECC;color:#291100}
+
+@media (max-width:760px){
+  .v2 .invite{grid-template-columns:1fr;grid-template-areas:"eye" "h1" "lead" "story"}
+  .v2 .topbar .meta{display:none}
+}
+
+html,body{overflow-x:clip}
+/* ================= DIRECTION C: poster type on the gradient ================= */
+.hero{padding-block:clamp(40px,6vw,90px) clamp(56px,7vw,100px)}
+.c-hero{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,4vw,56px);align-items:center}
+.c-kick{display:flex;align-items:center;gap:10px;margin:0 0 18px;font:600 13px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#f1d27a}
+.c-kick img{height:26px;width:auto}
+.c-big{margin:0;font:clamp(56px,9.4vw,150px)/.84 var(--display);color:var(--paper);text-transform:uppercase;letter-spacing:-.02em;text-shadow:0 4px 30px rgba(10,20,5,.25)}
+.c-big .y{color:#F1C75B}
+.c-big .w{display:inline-block;transform:skewY(-4deg) scaleY(1.12);transform-origin:left}
+.c-blurb{margin:26px 0 0;max-width:470px;font:18px/1.55 var(--sans);color:rgba(240,236,222,.92)}
+.c-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.c-btn{display:inline-flex;align-items:center;min-height:54px;padding:0 28px;border-radius:99px;background:var(--paper);color:var(--ink);text-decoration:none;font:700 15px var(--sans);letter-spacing:.06em;text-transform:uppercase;transition:transform .2s}
+.c-btn:hover{transform:translateY(-2px)}
+.c-btn.o{background:transparent;border:2px solid var(--paper);color:var(--paper)}
+.c-hero .postcard{max-width:none;width:100%;transform:rotate(3deg);animation:none}
+.c-hero .postcard .ctas{display:none!important}
+.c-hero .postcard .paper{padding-bottom:11cqw}
+.marq{background:#E3B84E;color:var(--ink);overflow:hidden;white-space:nowrap;padding:14px 0;transform:rotate(-1.6deg) scale(1.04);border-block:3px solid var(--ink);position:relative;z-index:3;margin-top:-22px}
+.marq .t{display:inline-block;animation:mq 30s linear infinite;font:clamp(20px,2.4vw,30px) var(--display);text-transform:uppercase}
+.marq .t span{margin:0 22px}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* type everywhere gets louder */
+.invite{text-align:left;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"eye eye" "h1 lead" "h1 story";column-gap:clamp(32px,6vw,90px);row-gap:18px;padding-top:clamp(80px,10vw,140px)}
+.invite .eyebrow{grid-area:eye}
+.invite h1{grid-area:h1;margin:0;font-size:clamp(44px,6vw,92px);line-height:.95;text-transform:uppercase;letter-spacing:-.01em}
+.invite h1 br{display:none}
+.invite h1 .makers{height:1em}
+.invite .lead{grid-area:lead;margin:0;max-width:none;font-size:20px;line-height:1.5}
+.invite .story{grid-area:story;margin:0;max-width:none;font-size:17.5px;line-height:1.65}
+.invite .story p+p{margin-top:12px}
+.acts-head{text-align:left}
+.acts-head h2{font:clamp(52px,8vw,124px)/.9 var(--display);text-transform:uppercase;color:var(--ink);letter-spacing:-.01em}
+.acts-head p{font-size:14px;letter-spacing:.14em;text-transform:uppercase;margin-top:14px}
+.room h2{font-size:clamp(40px,5.6vw,84px);line-height:.95;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:22px}
+.room .copy{font-size:17.5px;line-height:1.65}
+.room .copy p+p{margin-top:12px}
+.acts .inner,.room-inner{max-width:1240px}
+
+@media (max-width:900px){
+  .c-hero{grid-template-columns:1fr}
+  .c-hero .postcard{max-width:560px;margin:10px auto 0;transform:rotate(2deg)}
+  .invite{grid-template-columns:1fr;grid-template-areas:"eye" "h1" "lead" "story"}
+}
+
+/* intro: drop the repeated headline; the opening line becomes the statement */
+.invite{grid-template-areas:"lead story"!important}
+.invite .eyebrow,.invite h1{display:none}
+.invite .lead{font:clamp(28px,3.4vw,46px)/1.12 var(--display)!important;color:var(--green-head);text-wrap:balance}
+@media (max-width:900px){.invite{grid-template-areas:"lead" "story"!important}}
+
+/* postcard moved below the hero, on the cream; tinted so it reads against the page */
+.c-hero{grid-template-columns:1fr!important;max-width:1240px}
+.c-big{font-size:clamp(56px,10.5vw,168px)}
+.pc-sec{padding-block:clamp(64px,8vw,110px) 0}
+.pc-sec .postcard{max-width:900px;transform:rotate(-1.5deg);filter:drop-shadow(0 22px 34px rgba(41,17,0,.28)) drop-shadow(0 2px 3px rgba(41,17,0,.25))}
+.pc-sec .postcard .paper{background-color:#d6c9a6;background-blend-mode:multiply}
+.pc-sec .postcard .paper::after{content:"";position:absolute;inset:0;background:rgba(196,154,80,.18);mix-blend-mode:multiply;pointer-events:none}
+.pc-sec .postcard .paper>*{position:relative;z-index:1}
+.invite{padding-top:clamp(56px,7vw,100px)!important}
+
+/* ===== new content sections ===== */
+.x-sec{padding-block:clamp(64px,8vw,110px)}
+.x-in{max-width:1240px;margin:0 auto}
+.x-h{font:clamp(40px,6vw,92px)/.92 var(--display);text-transform:uppercase;letter-spacing:-.01em;margin:0 0 32px;color:var(--ink)}
+.x-sub{font:24px var(--display);margin:0 0 6px}
+.x-expect{background:#efe9d8;border-top:3px solid var(--ink)}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.num{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:26px;border-radius:4px;font:17px var(--sans)}
+.num b{display:block;font:clamp(44px,5vw,64px)/1 var(--display);color:var(--f-green);margin-bottom:6px}
+.x-show{background:#d9cba6;border-top:3px solid var(--ink)}
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,4vw,56px);align-items:start}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.step{background:#f3efe3;padding:22px;border-radius:6px}
+.step i{display:block;font:44px/1 var(--display);font-style:normal;color:#9A3F12;margin-bottom:12px}
+.step b{display:block;font:600 18px var(--sans)}
+.step p{margin:4px 0 0;font:16px/1.5 var(--sans)}
+.get{list-style:none;margin:0 0 20px;padding:0}
+.get li{padding:12px 0;border-bottom:1px dashed rgba(41,17,0,.35);font:17px var(--sans)}
+.get li::before{content:"✦ ";color:#9A3F12}
+.deadline{background:var(--f-green);color:var(--paper);padding:26px;border-radius:6px;font:16px var(--sans)}
+.deadline b{display:block;font:34px var(--display);margin:4px 0 16px}
+/* dark band: timeline + folders */
+.acts{background:#291100;color:var(--paper);border-top:3px solid var(--ink);padding-top:clamp(64px,8vw,110px)!important}
+.acts .x-h,.acts .acts-head h2{color:var(--paper)}
+.acts .acts-head p{color:#d9c48a}
+.acts .acts-head{margin-top:clamp(64px,8vw,100px)}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.timeline::before{content:"";position:absolute;left:0;right:0;top:9px;height:2px;background:rgba(226,222,204,.5)}
+.slot{position:relative;padding:40px 22px 0 0;font:16px/1.5 var(--sans)}
+.slot::before{content:"";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:#D4AD4B;border:2px solid var(--paper)}
+.slot time{display:block;font:24px var(--display);color:#F1C75B;margin-bottom:6px}
+.slot b{display:block;font:600 18px var(--sans)}
+.slot p{margin:4px 0 0;color:rgba(226,222,204,.8)}
+/* faq on top of camera */
+.room{padding-top:clamp(64px,8vw,110px)}
+.faq details{border-bottom:2px solid var(--ink);padding:20px 0}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;font:clamp(18px,1.8vw,24px) var(--display)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:700 24px var(--sans)}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:10px 0 0;max-width:720px;font:17px/1.6 var(--sans)}
+.room .beams{margin-top:clamp(56px,7vw,100px)}
+@media (max-width:900px){.nums,.timeline{grid-template-columns:1fr 1fr}.split{grid-template-columns:1fr}.timeline::before{display:none}.slot{padding-bottom:24px}}
+@media (max-width:520px){.nums,.steps,.timeline{grid-template-columns:1fr}}
+
+/* review round 1 */
+.c-big .w{transform:skewY(-3deg) scaleY(1.1) translateY(.07em);transform-origin:center bottom;translate:-.13em -.065em}
+.pc-sec .postcard .paper{background-color:#efe8d6!important}
+.pc-sec .postcard .paper::after{background:rgba(196,154,80,.07)!important}
+.invite{display:block!important;text-align:center!important;max-width:760px!important;padding-top:clamp(48px,6vw,80px)!important}
+.invite .lead{font:clamp(26px,3vw,40px)/1.15 var(--display)!important;margin:0 auto 18px!important}
+.invite .story{text-align:center!important;max-width:600px!important;margin:0 auto!important;font-size:18px!important;line-height:1.6!important}
+.split{align-items:stretch}
+.split>div:last-child{display:flex;flex-direction:column}
+.split .x-sub{margin-top:0;line-height:1}
+.split .deadline{margin-top:auto}
+.split .get{margin-bottom:20px}
+@media (prefers-reduced-motion:reduce){.marq .t{animation:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+
+
+</head>
+<body>
+<nav class="topbar wrap" aria-label="Site">
+  <a class="brand" href="#top"><img src="assets/logo-cube.png" alt="">The Canon</a>
+  <span class="meta">Sun, Nov 1 · Studio Bell, Calgary</span>
+  <a class="btn rsvp" href="https://wygo.world/the-canon-event" target="_blank" rel="noopener">RSVP</a>
+</nav>
+<header class="hero wrap" id="top">
+ <div class="c-hero">
+  <div class="c-copy">
+    <h1 class="c-big">The <span class="y w">greatest</span><br>gathering<br>of <span class="y">makers</span></h1>
+    <p class="c-blurb">Painters, founders, filmmakers, musicians, designers and small business owners. One night, one room, everything Calgary made this year.</p>
+    <div class="c-ctas">
+      <a class="c-btn" href="https://wygo.world/the-canon-event" target="_blank" rel="noopener">RSVP</a>
+      <a class="c-btn o" href="https://tally.so/r/b50eYZ" target="_blank" rel="noopener">Show your work</a>
+    </div>
+  </div>
+
+ </div>
+</header>
+<div class="marq" aria-hidden="true"><div class="t"><span>Painters</span>✦<span>Founders</span>✦<span>Filmmakers</span>✦<span>Musicians</span>✦<span>Designers</span>✦<span>Business owners</span>✦<span>Writers</span>✦<span>Builders</span>✦<span>Dreamers</span>✦<span>Painters</span>✦<span>Founders</span>✦<span>Filmmakers</span>✦<span>Musicians</span>✦<span>Designers</span>✦<span>Business owners</span>✦<span>Writers</span>✦<span>Builders</span>✦<span>Dreamers</span>✦</div></div>
+
+<main>
+  <section class="pc-sec wrap">
+  <div class="postcard">
+    <img class="tape" src="assets/tape-hero.png" alt="">
+    <div class="paper">
+      <div class="pc-left">
+        <p class="hello">You’re invited!</p>
+        <img class="cube" src="assets/logo-cube-grad.png" alt="The Canon">
+      </div>
+      <div class="divider" aria-hidden="true"></div>
+      <div class="pc-right">
+        <dl class="addr">
+          <dt>From:</dt><dd><span>The Archive</span><br><span>Ascend Calgary</span><br>so.social.collective</dd>
+          <dt>To:</dt><dd><span>You!</span></dd>
+          <dt>When</dt><dd><span>Sun, Nov 1 · Studio Bell</span></dd>
+        </dl>
+        <p class="brewing">Something wild has been brewing in Calgary…</p>
+      </div>
+    </div>
+  </div>
+  </section>
+  <section class="invite wrap">
+    <p class="lead">Nobody wakes up one day and decides to achieve the impossible. Somewhere in that story is a night that made it feel possible.</p>
+    <div class="story"><p>Calgary is full of people making things quietly, in bedrooms, basements and studios. The Canon brings all of it into one room, for one night, with the people who made it standing right beside it.</p></div>
+  </section>
+
+  <section class="x-sec x-expect wrap">
+    <div class="x-in">
+      <h2 class="x-h">What to expect</h2>
+      <div class="nums">
+        <div class="num"><b>3</b>acts in one day</div><div class="num"><b>3</b>spaces inside Studio Bell</div>
+        <div class="num"><b>10</b>short films</div><div class="num"><b>264</b>seats in the Performance Hall</div>
+      </div>
+    </div>
+  </section>
+  <section class="x-sec x-show wrap" id="show-your-work">
+    <div class="x-in">
+      <h2 class="x-h">Got something to show?</h2>
+      <div class="split">
+        <div class="steps">
+          <div class="step"><i>1</i><b>Apply</b><p>Tell us what you made. Takes 5 minutes.</p></div>
+          <div class="step"><i>2</i><b>We review</b><p>Replies within 1 week.</p></div>
+          <div class="step"><i>3</i><b>Get your spot</b><p>A table, a screen slot or a seat.</p></div>
+          <div class="step"><i>4</i><b>Show up</b><p>Load in from 12 to 2 PM on the day.</p></div>
+        </div>
+        <div>
+          <h3 class="x-sub">What you get</h3>
+          <ul class="get"><li>A table on the market floor</li><li>Your work in front of the whole city</li><li>A spot on this site's maker list</li><li>A chance at the dinner table</li></ul>
+          <div class="deadline">Applications are open<b>Spots are limited</b><a class="c-btn" href="https://tally.so/r/b50eYZ" target="_blank" rel="noopener">Apply now</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="acts wrap" id="acts">
+    <div class="inner">
+      <div class="tl-wrap">
+        <h2 class="x-h">How the night unfolds</h2>
+        <div class="timeline">
+          <div class="slot"><time>2:00 PM</time><b>Doors + night market</b><p>Local makers and vendors in the Soundscapes Gallery, until 5:45.</p></div>
+          <div class="slot"><time>4:00 PM</time><b>The Dinner</b><p>Invite-only sponsor dinner, off-site at House 831.</p></div>
+          <div class="slot"><time>6:00 PM</time><b>Red carpet</b><p>Arrivals at the north doors on 4 St SE.</p></div>
+          <div class="slot"><time>6:30 PM</time><b>Film festival</b><p>Ten short films in the Performance Hall, plus the Sidequest Fund announcement.</p></div>
+        </div>
+      </div>
+      <div class="acts-head">
+        <h2>Three Acts. One Night.</h2>
+      </div>
+      <div class="cabinet" role="tablist" aria-label="The three acts">
+
+        <article class="folder f-red" id="f-red" data-pos="2">
+          <button class="tab" role="tab" id="tab-red" aria-controls="f-red" aria-selected="false"><span class="full">ACT III: THE DINNER</span><span class="short">ACT III</span></button>
+          <div class="body" role="tabpanel" aria-labelledby="tab-red">
+            <figure class="polaroid">
+              <img class="deco tape" src="assets/tape-small.png" alt="">
+              <img class="photo" src="assets/photo-dinner.jpg" alt="Hands reaching across a dinner table set with plates and drinks" loading="lazy">
+              <figcaption>Around 35 seats</figcaption>
+            </figure>
+            <div class="text">
+              <h3>THE DINNER</h3>
+              <p class="desc">An invite-only dinner for about 35, before the films. We seat makers next to the people who can back their next thing, whether that's a gallery, a label, a fund or a collaborator.</p>
+              <dl class="info"><dt>When:</dt><dd>4:00 – 5:45 PM</dd><dt>Where:</dt><dd>House 831 (off-site)</dd><dt>Access:</dt><dd>Invite only</dd></dl>
+            </div>
+          </div>
+        </article>
+
+        <article class="folder f-green" id="f-green" data-pos="1">
+          <button class="tab" role="tab" id="tab-green" aria-controls="f-green" aria-selected="false"><span class="full">ACT II: THE SCREENING</span><span class="short">ACT II</span></button>
+          <div class="body" role="tabpanel" aria-labelledby="tab-green">
+            <figure class="polaroid">
+              <img class="deco binder" src="assets/binderclip.png" alt="">
+              <img class="photo" src="assets/photo-screening.jpg" alt="A cinema audience wearing colourful 3D glasses" loading="lazy">
+              <figcaption>Ten films + one screen</figcaption>
+            </figure>
+            <div class="text">
+              <h3>THE SCREENING</h3>
+              <p class="desc">Ten short films about people who made something real this year, screened together on one big screen. Covered live by 100+ creators, with the winners funded to keep telling their story.</p>
+              <dl class="info"><dt>When:</dt><dd>6:30 – 8:15 PM</dd><dt>Where:</dt><dd>Performance Hall</dd><dt>Seats:</dt><dd>264</dd></dl>
+            </div>
+          </div>
+        </article>
+
+        <article class="folder f-yellow" id="f-yellow" data-pos="0">
+          <button class="tab" role="tab" id="tab-yellow" aria-controls="f-yellow" aria-selected="true"><span class="full">ACT I: THE GATHERING</span><span class="short">ACT I</span></button>
+          <div class="body" role="tabpanel" aria-labelledby="tab-yellow">
+            <figure class="polaroid">
+              <img class="deco clip" src="assets/paperclip.png" alt="">
+              <img class="photo" src="assets/photo-gathering.jpg" alt="A crowded indoor market hall full of people and maker booths">
+              <figcaption>The whole city. One market</figcaption>
+            </figure>
+            <div class="text">
+              <h3>THE GATHERING</h3>
+              <p class="desc">A market for everything Calgary made this year. Painters, founders, musicians, filmmakers, small business owners and everyone in between set up a table and show their work to anyone who walks in. It’s the most open part of the night, and the first look for people who didn’t know Calgary had a scene this big.</p>
+              <dl class="info"><dt>When:</dt><dd>2:00 – 5:45 PM</dd><dt>Where:</dt><dd>Soundscapes Gallery</dd><dt>Access:</dt><dd>RSVP required</dd></dl>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="room">
+    <div class="wrap"><div class="room-inner faq">
+      <h2 class="x-h">Questions</h2>
+      <details open><summary>Do I need a finished project to show?</summary><p>No. Works in progress are welcome.</p></details>
+      <details><summary>Where is it?</summary><p>Studio Bell, National Music Centre, 850 4 St SE, Calgary. Come in through the north doors on 4 Street, beside the NMC Café.</p></details>
+      <details><summary>Which parts can I attend?</summary><p>The night market and the film festival are open with an RSVP. The dinner is invite only.</p></details>
+      <details><summary>Can I bring a friend?</summary><p>Yes. Each person should RSVP so we can plan for the room.</p></details>
+      <details><summary>Can I sell things at the market?</summary><p>Yes. Vendors set up in the Soundscapes Gallery. Food must be prepacked, with no open food stations.</p></details>
+      <details><summary>Is there an age limit?</summary><p>To be confirmed.</p></details>
+      <details><summary>What should I wear?</summary><p>Whatever you would wear to a gallery opening.</p></details>
+      <details><summary>I'm not in tech. Is this for me?</summary><p>Yes. Painters, filmmakers, musicians, designers and small business owners are exactly who this is for.</p></details>
+    </div></div>
+    <div class="beams">
+      <img class="camera" src="assets/camera.webp" alt="" loading="lazy">
+      <picture><source media="(min-width:2000px)" srcset="assets/beams-wide.webp"><img class="rays" src="assets/beams.webp" alt="Photos from past Canon gatherings projected out of a vintage camera" loading="lazy"></picture>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="inner" style="max-width:1238px">
+    <h4>Previously backed by</h4>
+    <ul class="logos">
+      <li><a href="https://www.shopify.com/ca" target="_blank" rel="noopener" aria-label="Shopify (opens in a new tab)"><img src="assets/logo2-shopify.png" alt="Shopify" data-logo="Shopify" style="--h:40.2px"></a></li>
+      <li><a href="https://cursor.com/" target="_blank" rel="noopener" aria-label="Cursor (opens in a new tab)"><img src="assets/logo2-cursor.png" alt="Cursor" data-logo="Cursor" style="--h:36.6px"></a></li>
+      <li><a href="https://www.localhosthq.com/" target="_blank" rel="noopener" aria-label="localhostHQ (opens in a new tab)"><img src="assets/logo2-localhosthq.png" alt="localhostHQ" data-logo="localhostHQ" style="--h:30.1px"></a></li>
+      <li><a href="https://sipnscale.com/" target="_blank" rel="noopener" aria-label="Sip & Scale (opens in a new tab)"><img src="assets/logo2-sipscale.png" alt="Sip & Scale" data-logo="Sip & Scale" style="--h:46px"></a></li>
+      <li><a href="https://www.ucalgary.ca/" target="_blank" rel="noopener" aria-label="University of Calgary (opens in a new tab)"><img src="assets/logo2-ucalgary.png" alt="University of Calgary" data-logo="University of Calgary" style="--h:40.0px"></a></li>
+      <li><a href="https://www.aftersell.com/" target="_blank" rel="noopener" aria-label="AfterSell (opens in a new tab)"><img src="assets/logo2-aftersell.png" alt="AfterSell" data-logo="AfterSell" style="--h:38.0px"></a></li>
+    </ul>
+    <h4>In partnership with</h4>
+    <ul class="logos partners">
+      <li><a href="https://so-social-collective-web.vercel.app/" target="_blank" rel="noopener" aria-label="so.social.collective (opens in a new tab)"><img src="assets/logo2-sosocial.png" alt="so.social.collective" data-logo="so.social.collective" style="--h:58px"></a></li>
+      <li><a href="https://www.instagram.com/ascendcalgary/" target="_blank" rel="noopener" aria-label="Ascend Calgary (opens in a new tab)"><img src="assets/logo2-ascend.png" alt="Ascend Calgary" data-logo="Ascend Calgary" style="--h:43.8px"></a></li>
+      <li><a href="https://www.jointhearchive.com/" target="_blank" rel="noopener" aria-label="The Archive (opens in a new tab)"><img src="assets/logo2-archive.png" alt="The Archive" data-logo="The Archive" style="--h:37.3px"></a></li>
+    </ul>
+  </div>
+</footer>
+
+<div class="view-toggle" hidden role="group" aria-label="Design version">
+  <button type="button" data-v="1" aria-pressed="false">Original</button>
+  <button type="button" data-v="2" aria-pressed="true">Refresh</button>
+</div>
+<script>
+(() => {
+  const root = document.documentElement, btns = document.querySelectorAll('.view-toggle button');
+  const set = v => { root.classList.toggle('v2', v === '2'); btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v)); try { localStorage.setItem('canon-view', v); } catch (e) {} };
+  set('1'); btns.forEach(b => b.onclick = () => set(b.dataset.v));
+})();
+</script>
+<script>
+(() => {
+  const folders = [...document.querySelectorAll('.folder')];
+  // stack order, front first
+  let order = ['f-yellow','f-green','f-red'];
+  function render(pulled){
+    order.forEach((id,i) => {
+      const f = document.getElementById(id);
+      f.dataset.pos = i;
+      f.style.zIndex = 10 - i;
+      f.querySelector('.body').setAttribute('aria-hidden', i === 0 ? 'false' : 'true');
+      const t = f.querySelector('.tab');
+      t.setAttribute('aria-selected', i === 0);
+      t.tabIndex = i === 0 ? 0 : -1;
+      // tabs must stay clickable even when the folder is behind
+      t.style.zIndex = 20;
+    });
+    if (pulled){
+      const f = document.getElementById(pulled);
+      f.classList.remove('pull'); void f.offsetWidth; f.classList.add('pull');
+    }
+  }
+  function open(id, focus){
+    if (order[0] === id) return;
+    order = [id, ...order.filter(x => x !== id)];
+    render(id);
+    if (focus) document.getElementById(id).querySelector('.tab').focus();
+  }
+  const ids = ['f-yellow','f-green','f-red'];
+  folders.forEach(f => {
+    const t = f.querySelector('.tab');
+    t.addEventListener('click', () => open(f.id));
+    t.addEventListener('keydown', e => {
+      const i = ids.indexOf(f.id);
+      if (e.key === 'ArrowRight'){ e.preventDefault(); open(ids[(i+1)%3], true); }
+      if (e.key === 'ArrowLeft'){ e.preventDefault(); open(ids[(i+2)%3], true); }
+    });
+  });
+  render();
+})();
+</script>
+
+<script>
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  // Only things below the first screen fade in, so the page is never blank when it opens.
+  const els = document.querySelectorAll('.invite .lead, .invite .story, .x-sec .x-h, .nums, .split, .tl-wrap, .acts-head, .cabinet, .faq, .beams, footer .inner');
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { rootMargin: '0px 0px -8% 0px' });
+  els.forEach((el, i) => {
+    if (el.getBoundingClientRect().top < innerHeight * 0.92) return;
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+  // safety net: never leave anything hidden
+  setTimeout(() => els.forEach(el => el.classList.add('in')), 8000);
+})();
+</script>
+
+
+
+</body>
+</html>
