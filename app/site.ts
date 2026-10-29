@@ -12,11 +12,18 @@ export const site = {
   name: "The Canon Event",
   presenter: "The Archive Fund",
   description:
-    "The greatest gathering of builders on earth. November 2026 — Calgary, Alberta.",
+    "A day for the people making things happen in Calgary. Creatives, entrepreneurs, founders and builders. November 15 at Werklund Centre, Downtown Calgary.",
 
-  date: "November 2026",
-  dateShort: "NOV 2026",
-  place: "Calgary, Alberta",
+  date: "November 15, 2026",
+  dateShort: "NOV 15, 2026",
+  place: "Calgary, AB",
+
+  /** The main venue. Each act's own hall is listed in Acts.tsx. */
+  venue: {
+    name: "Werklund Centre",
+    area: "Downtown Calgary, AB",
+    url: "https://werklundcentre.ca",
+  },
 
   /** Public origin, used to absolutise the social-card URL. */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",

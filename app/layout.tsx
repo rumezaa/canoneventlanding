@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#37442E",
+  themeColor: "#FEFCF0",
   viewportFit: "cover",
 };
 
@@ -34,9 +34,6 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${display.variable} ${wordmark.variable} ${mono.variable} ${hand.variable}`}>
-      <head>
-        <link rel="preload" as="image" href="/assets/background.webp" type="image/webp" />
-      </head>
       <body>{children}</body>
     </html>
   );

@@ -1,7 +1,6 @@
-import { site } from "../site";
 import styles from "./Invitation.module.css";
 
-/* Copy from the landing-page comp (Figma 278:2, "02 — an invitation"). */
+/* Event introduction — copy from the website update brief, §1–2. */
 
 export default function Invitation() {
   return (
@@ -10,37 +9,35 @@ export default function Invitation() {
         <p className={styles.lead}>You are invited to</p>
 
         <h2 className={styles.statement}>
-          the greatest gathering of builders on earth.
+          a night for the people building things in this city, and across the
+          country.
         </h2>
 
         <div className={styles.prose}>
           <p>
-            Nobody wakes up one day and decides to be a founder. Somewhere in
-            that story is a night that made it feel possible.
+            Come for the market, the films, and the people. Stay for the
+            conversations, the inspiration, and the connections you didn&rsquo;t
+            know you needed.
           </p>
           <p>
-            Canada&rsquo;s builders are real, but their stories are invisible.
-            The demos happen in rooms of forty, on Friday nights, in scattered
-            cities — and then they disappear. The work is good. Almost nobody
-            outside the room ever sees it.
+            From emerging brands and independent creatives to ambitious startups
+            and new businesses, The Canon Event brings together the people
+            turning ideas into something real.
           </p>
           <p>
-            The Canon Event is the first time a year of that work gets projected
-            in one place, with the people who made it standing next to it.
+            A space to discover what&rsquo;s being built, celebrate local talent,
+            exchange ideas, and connect with people from across Calgary&rsquo;s
+            creative and entrepreneurial scene.
           </p>
         </div>
 
+        <p className={styles.tagline}>
+          Different industries. Different perspectives. One room.
+        </p>
+
         <p className={`note ${styles.signoff}`}>
-          —{" "}
-          <a
-            className={styles.signoffLink}
-            href={site.orgs.archiveFund.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            the archive fund
-          </a>
-          , calgary
+          you never know who you&rsquo;ll meet, or what it might inspire you to
+          build next&hellip;
         </p>
       </div>
     </section>

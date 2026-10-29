@@ -2,6 +2,7 @@ import Hero from "./components/Hero";
 import Invitation from "./components/Invitation";
 import Acts from "./components/Acts";
 import Gallery from "./components/Gallery";
+import Sponsors from "./components/Sponsors";
 import BackedBy from "./components/BackedBy";
 import Support from "./components/Support";
 import { site } from "./site";
@@ -21,6 +22,8 @@ export default function Home() {
 
         <Gallery />
 
+        <Sponsors />
+
         <BackedBy />
 
         <Support />
@@ -28,7 +31,7 @@ export default function Home() {
         <footer className={styles.footer}>
           <span>&copy; 2026 {site.presenter}</span>
           <span>
-            {site.dateShort} &middot; {site.place}
+            {site.dateShort} &middot; {site.venue.name} &middot; {site.venue.area}
           </span>
         </footer>
       </div>

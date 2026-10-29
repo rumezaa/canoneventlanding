@@ -1,84 +1,151 @@
+import { site } from "../site";
 import styles from "./Acts.module.css";
 
 /*
- * Copy and layout from the landing-page comp (Figma 279:2, "03 — the night").
- * The comp also carries an "audience: …" line per act, but those labels do not
- * line up with the blurbs beside them (Act I is tagged "founders 3+ years out"
- * next to copy about the widest point of the funnel). Left out pending a
- * decision rather than shipping a likely mix-up.
+ * The three acts, as native <details> toggles so they open and close with
+ * no client JS. Copy, times and venues from the website update brief, §3.
+ * Act I starts open so the section never reads as an empty list.
  */
 
-const acts = [
+type Act = {
+  numeral: string;
+  act: string;
+  title: string;
+  time: string;
+  still: string;
+  alt: string;
+  body: string[];
+  /** The hall inside Werklund Centre, linked out when it has its own page. */
+  venue?: { name: string; url: string };
+  access?: string;
+};
+
+const acts: Act[] = [
   {
     numeral: "I",
     act: "ACT I",
-    kicker: "Doors open to the city",
-    title: "The Gathering",
+    title: "The Gathering Market",
+    time: "11:00 AM – 5:00 PM",
     still: "/assets/stills/gathering.webp",
-    alt: "A crowded demo floor, builders showing their work to walk-ins.",
-    blurb:
-      "Builders and early-stage startups demo what they actually made this year, in person, to anyone who walks in. The widest point of the funnel — and the first touch for people who didn't know Calgary had a scene.",
+    alt: "An overhead shot of a crowded courtyard around a DJ booth at night.",
+    body: [
+      "Explore a vibrant market bringing together local businesses, creatives, and builders, with music, unique finds, and new ideas around every corner.",
+      "Meet the people behind the projects, discover local brands, and connect with a community of people building something of their own!",
+    ],
+    venue: {
+      name: "Jack Singer Concert Hall Lobby",
+      url: "https://werklundcentre.ca/visit/venues/jack-singer-concert-hall",
+    },
   },
   {
     numeral: "II",
     act: "ACT II",
-    kicker: "Red carpet, ten films",
-    title: "The Screening",
+    title: "The Film Festival",
+    time: "6:15 PM – 9:00 PM",
     still: "/assets/stills/screening.webp",
-    alt: "A packed screening-room audience watching the films.",
-    blurb:
-      "Ten short films on people who built something real this year. Not launch videos. Covered live by 100+ creators, with the winners funded to keep telling the story online.",
+    alt: "A full theatre facing a screen showing The Canon Event title card.",
+    body: [
+      "Ten short films sharing the stories behind Calgary’s creatives and builders. Why they started, what they’re passionate about, and the journey of turning an idea into something of their own.",
+      "A chance to hear their stories, get inspired, and see what happens when people decide to go for it.",
+    ],
+    venue: {
+      name: "Engineered Air Theatre",
+      url: "https://werklundcentre.ca/visit/venues/engineered-air-theatre",
+    },
   },
   {
     numeral: "III",
     act: "ACT III",
-    kicker: "Invite only",
     title: "The Dinner",
+    time: "4:00 PM – 5:30 PM",
     still: "/assets/stills/dinner.webp",
-    alt: "An overhead shot of a long dinner table mid-service.",
-    blurb:
-      "We sit builders next to the person who can fund their next thing. Our team came out of Cursor (acq. SpaceX AI), Shopify, Y Combinator, ZayZoon and Cansbridge — that's who we pull from.",
+    alt: "A long candlelit dinner table seen from above, guests mid-conversation.",
+    body: [
+      "An intimate, private dinner bringing together a curated group of founders, investors, and entrepreneurs.",
+      "A space for meaningful conversations, exchanging ideas, and connecting with people who are building, investing in, and shaping what’s next.",
+    ],
+    access: "Private, invite-only dinner",
   },
 ];
 
 export default function Acts() {
+  const { venue } = site;
+
   return (
-    <section className={styles.section} id="the-night">
+    <section className={styles.section} id="the-event">
       <header className={styles.head}>
         <div>
-          <h2 className={styles.title}>Three acts, one night.</h2>
-          <p className={styles.standfirst}>
-            Doors open to the whole city, then narrow through the evening —
-            from a floor anyone can walk into, to ten films on a screen, to a
-            table of thirty.
-          </p>
+          <p className="eyebrow">The event</p>
+          <h2 className={styles.title}>Three acts, one day.</h2>
         </div>
-        <p className={styles.when}>
-          NOV 2026 &nbsp;·&nbsp; CALGARY, AB
+        <p className={styles.where}>
+          {site.dateShort}
+          <span className={styles.dot} aria-hidden="true"> · </span>
+          <a href={venue.url} target="_blank" rel="noopener noreferrer">
+            {venue.name}
+          </a>
+          <span className={styles.dot} aria-hidden="true"> · </span>
+          {venue.area}
         </p>
       </header>
 
       <div className={styles.acts}>
-        {acts.map((a) => (
-          <div className={styles.col} key={a.act}>
-            <span className={styles.numeral} aria-hidden="true">
-              {a.numeral}
-            </span>
+        {acts.map((a, i) => (
+          <details className={styles.item} key={a.act} open={i === 0}>
+            <summary className={styles.summary}>
+              <span className={styles.numeral} aria-hidden="true">
+                {a.numeral}
+              </span>
+              <span className={styles.heading}>
+                <span className={styles.act}>{a.act}</span>
+                <span className={styles.actTitle}>{a.title}</span>
+              </span>
+              <span className={styles.time}>{a.time}</span>
+              <span className={styles.toggle} aria-hidden="true" />
+            </summary>
 
-            <article className={styles.card}>
+            <div className={styles.panel}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className={styles.still} src={a.still} alt={a.alt} loading="lazy" decoding="async" />
 
               <div className={styles.copy}>
-                <div className={styles.slate}>
-                  <span className={styles.act}>{a.act}</span>
-                  <span className={styles.kicker}>{a.kicker.toUpperCase()}</span>
-                </div>
-                <h3 className={styles.actTitle}>{a.title}</h3>
-                <p className={styles.blurb}>{a.blurb}</p>
+                {a.body.map((p) => (
+                  <p className={styles.blurb} key={p}>
+                    {p}
+                  </p>
+                ))}
+
+                <dl className={styles.facts}>
+                  <div>
+                    <dt>Time</dt>
+                    <dd>{a.time}</dd>
+                  </div>
+                  {a.venue && (
+                    <div>
+                      <dt>Venue</dt>
+                      <dd>
+                        <a href={a.venue.url} target="_blank" rel="noopener noreferrer">
+                          {a.venue.name} ↗
+                        </a>
+                      </dd>
+                    </div>
+                  )}
+                  <div>
+                    <dt>Location</dt>
+                    <dd>
+                      {venue.name}, {venue.area.replace(", AB", "")}
+                    </dd>
+                  </div>
+                  {a.access && (
+                    <div>
+                      <dt>Access</dt>
+                      <dd>{a.access}</dd>
+                    </div>
+                  )}
+                </dl>
               </div>
-            </article>
-          </div>
+            </div>
+          </details>
         ))}
       </div>
     </section>

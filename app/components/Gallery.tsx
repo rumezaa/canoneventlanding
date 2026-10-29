@@ -1,4 +1,3 @@
-import { site } from "../site";
 import styles from "./Gallery.module.css";
 
 /* Stills and captions from the landing-page comp (Figma 280:10, "contact sheet"). */
@@ -12,48 +11,21 @@ const prints = [
   { src: "/assets/stills/still-builders.webp",      caption: "Some of our builders",alt: "Two builders working on laptops during a session." },
 ];
 
-const { archiveFund, ascend, soSocial, cursorMeetups } = site.orgs;
-
-/** An organisation mentioned mid-sentence, linked out. */
-function Org({ org }: { org: { name: string; url: string } }) {
-  return (
-    <a
-      className={styles.orgLink}
-      href={org.url}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {org.name}
-    </a>
-  );
-}
-
 export default function Gallery() {
   return (
-    <section className={styles.section} id="the-room">
+    <section className={styles.section} id="community">
       <header className={styles.head}>
-        <h2 className={styles.title}>
-          The room you curate for someone creates builders.
-        </h2>
+        <p className="eyebrow">More than an event</p>
+        <h2 className={styles.title}>A community.</h2>
 
         <div className={styles.prose}>
           <p>
-            The city that built its name on energy is now the
-            fastest-compounding startup room in the country — and almost nobody
-            outside it has noticed.
+            Whether you&rsquo;re building a business, creating something new,
+            launching a startup, telling stories, or simply curious about what
+            people around you are making, there&rsquo;s a place for you here.
           </p>
-          <p>
-            Our team built three audiences of creators, builders and makers
-            entirely out of Calgary: <Org org={ascend} />,{" "}
-            <Org org={archiveFund} />, <Org org={soSocial} /> and{" "}
-            <Org org={cursorMeetups} />. Two thousand builders have come through
-            them, on Friday nights, in rooms of forty, with no audience beyond
-            the people who showed up.
-          </p>
-          <p>
-            The Canon Event is what happens when that room finally gets a
-            screen, a stage, and an audience the size of the thing it has
-            quietly been building.
+          <p className={styles.close}>
+            Come meet the people behind Calgary&rsquo;s next chapter.
           </p>
         </div>
       </header>
