@@ -2,7 +2,7 @@
  * ──────────────────────────────────────────────────────────────
  * The hero has two actions, both outbound:
  *   RSVP          → eventSiteUrl   (the event's wygo page)
- *   Be on stage   → stageFormUrl   (Tally)
+ *   Submit a film → stageFormUrl   (Tally)
  *
  * Supporters are pointed at supportEmail rather than a form.
  * stageFormUrl is overridable per-environment — see .env.local.example.
@@ -31,7 +31,7 @@ export const site = {
   /** The event's page on wygo. */
   eventSiteUrl: "https://wygo.world/the-canon-event",
 
-  /** Tally/Typeform where builders apply to demo on stage. */
+  /** Tally/Typeform behind the hero's "Submit a film" button. */
   stageFormUrl:
     process.env.NEXT_PUBLIC_STAGE_FORM_URL ?? "https://tally.so/r/b50eYZ",
 

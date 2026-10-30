@@ -19,6 +19,7 @@ const sponsors: Sponsor[] = [
     url: "https://www.ucalgary.ca/hunter-hub",
   },
   { name: "Aurrin Ventures", logo: "/assets/sponsors/aurrin-ventures.webp", ratio: 310 / 261, scale: 1.7 },
+  { name: "Red Bull", logo: "/assets/sponsors/red-bull.svg", ratio: 1686 / 408, scale: 0.8, url: "https://www.redbull.com" },
 ];
 
 export default function Sponsors() {

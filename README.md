@@ -17,7 +17,7 @@ public/assets/     exported from Figma (file sfrYl9h5NdXKnfFKV9h2sK, node 379:19
 
 ```
 hero                  wordmark, date, Calgary, by invitation
-                      + RSVP / Be on stage
+                      + RSVP / Submit a film
 an invitation         the premise, in prose
 three acts            The Gathering / The Screening / The Dinner
 the room so far       why Calgary, in prose + contact-sheet strip
@@ -46,7 +46,7 @@ Everything that leaves the site lives in `app/site.ts`.
 | What | Field | Appears |
 | --- | --- | --- |
 | Event / RSVP page | `eventSiteUrl` | hero **RSVP** button |
-| Builders form | `stageFormUrl` | hero **Be on stage** button |
+| Builders form | `stageFormUrl` | hero **Submit a film** button |
 | The Archive Fund | `orgs.archiveFund.url` | invitation signoff + Calgary paragraph |
 | Ascend Calgary | `orgs.ascend.url` | partnership row + Calgary paragraph |
 | So.Social | `orgs.soSocial.url` | partnership row + Calgary paragraph |

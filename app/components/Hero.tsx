@@ -84,7 +84,7 @@ export default function Hero() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Be on stage
+          Submit a film
         </a>
       </div>
 
