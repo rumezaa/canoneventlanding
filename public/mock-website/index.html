@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Canon</title>
-<meta name="description" content="The Canon: a film festival, night market and creator gathering. Sunday, Nov 1, 2026 at Studio Bell, Calgary.">
+<meta name="description" content="The Canon: a film festival, night market and creator gathering. Sunday, Nov 15, 2026 at Werklund Centre, Calgary.">
 <style>html,body{margin:0}</style>
 
 
@@ -378,6 +378,55 @@ html,body{overflow-x:clip}
 @media (prefers-reduced-motion:reduce){.marq .t{animation:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
+
+/* acts as a collapsible list (replaces the folder cabinet) */
+.timeline{grid-template-columns:repeat(3,1fr)!important}
+.acc{margin-top:clamp(28px,3vw,40px);border-top:1px solid rgba(226,222,204,.28)}
+.act{border-bottom:1px solid rgba(226,222,204,.28)}
+.act summary{list-style:none;display:grid;grid-template-columns:clamp(48px,6vw,84px) 1fr auto 40px;align-items:center;gap:16px;padding:clamp(20px,2.4vw,30px) 0;cursor:pointer}
+.act summary::-webkit-details-marker{display:none}
+.act .rn{font:italic 400 clamp(34px,4vw,56px)/1 Georgia,serif;color:rgba(226,222,204,.45)}
+.act .ttl{font:clamp(30px,3.6vw,52px)/1 var(--display);text-transform:uppercase;color:var(--paper)}
+.act .ttl small{display:block;font:600 12px var(--sans);letter-spacing:.2em;color:#F1C75B;margin-bottom:8px}
+.act .tm{font:500 15px var(--sans);letter-spacing:.06em;color:rgba(226,222,204,.8);white-space:nowrap}
+.act .tg{width:36px;height:36px;border-radius:50%;background:#F1C75B;position:relative;justify-self:end;transition:transform .3s}
+.act .tg::before,.act .tg::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:2.5px;background:#291100;border-radius:2px;transform:translate(-50%,-50%)}
+.act .tg::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .3s}
+.act[open] .tg::after{transform:translate(-50%,-50%) rotate(0)}
+.act summary:hover .ttl{color:#F1C75B}
+.act summary:focus-visible{outline:2px solid #F1C75B;outline-offset:4px;border-radius:6px}
+.act-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);padding:0 0 clamp(28px,3vw,44px) calc(clamp(48px,6vw,84px) + 16px);animation:act-in .35s ease both}
+.act-body .photo{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block}
+.act-body .desc{margin:0 0 14px;color:rgba(226,222,204,.88)}
+.act-body .info{display:grid;grid-template-columns:auto 1fr;gap:10px 22px;margin:20px 0 0;padding:20px 22px;background:#E2DECC;color:#291100;border-radius:10px;font:15px/1.4 var(--sans)}
+.act-body .info dt{font:600 11px/1.9 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#6b5a48}
+.act-body .info dd{margin:0}
+@keyframes act-in{from{opacity:0;transform:translateY(-6px)}}
+@media (max-width:760px){.timeline{grid-template-columns:1fr!important}.act summary{grid-template-columns:auto 1fr 36px;gap:12px}.act .tm{grid-column:2;grid-row:2;font-size:13px}.act .tg{grid-row:1/3;grid-column:3}.act .rn{grid-row:1/3}.act-body{grid-template-columns:1fr;padding-left:0}}
+@media (prefers-reduced-motion:reduce){.act-body{animation:none}}
+
+/* acts on the light page, timeline stays on the dark band */
+.acts-light{padding-block:clamp(64px,8vw,110px)}
+.acts-light{padding-bottom:0}
+.room .faq h2{color:var(--ink)}
+.acts-light .inner{max-width:1240px;margin:0 auto}
+.acts-light .acts-head{margin-top:0!important}
+.acts-light .acts-head h2{color:var(--ink)!important}
+.acts-light .acc{border-top-color:rgba(41,17,0,.18)}
+.acts-light .act{border-bottom-color:rgba(41,17,0,.18)}
+.acts-light .act summary{grid-template-columns:clamp(92px,10vw,140px) 1fr auto 40px}
+.acts-light .act .rn{font:italic 400 clamp(24px,2.6vw,36px)/1 Georgia,"Times New Roman",serif;color:#C49A2C;white-space:nowrap}
+.acts-light .act .ttl{font:600 clamp(26px,2.8vw,40px)/1.15 var(--sans);text-transform:none;letter-spacing:-.01em;color:var(--ink)}
+.acts-light .act summary:hover .ttl{color:#7a5a12}
+.acts-light .act .tm{color:#5d4c3c}
+.acts-light .act .tg{background:#2E4433}
+.acts-light .act .tg::before,.acts-light .act .tg::after{background:#F3EFE3}
+.acts-light .act summary:focus-visible{outline-color:#C49A2C}
+.acts-light .act-body{padding-left:calc(clamp(92px,10vw,140px) + 16px)}
+.acts-light .act-body .photo{aspect-ratio:4/3;object-fit:cover}
+.acts-light .act-body .desc{color:#3d2e22}
+.acts-light .act-body .info{background:#EDE6D3}
+@media (max-width:760px){.acts-light .act summary{grid-template-columns:1fr 36px}.acts-light .act .rn{grid-row:auto;grid-column:1;font-size:20px}.acts-light .act .ttl{grid-column:1}.acts-light .act .tm{grid-column:1;grid-row:auto}.acts-light .act .tg{grid-column:2;grid-row:1/4}.acts-light .act-body{padding-left:0}}
 /* postcard: mascot sticker replaces the plain cube */
 .pc-left .cube.sticker{width:23cqw;height:auto;max-width:100%;opacity:1;transform:rotate(-5deg);filter:drop-shadow(0 .8cqw 1.2cqw rgba(41,17,0,.28)) drop-shadow(0 .1cqw .2cqw rgba(41,17,0,.3));align-self:center;margin-top:-1cqw}
 </style>
@@ -387,14 +436,14 @@ html,body{overflow-x:clip}
 <body>
 <nav class="topbar wrap" aria-label="Site">
   <a class="brand" href="#top"><img src="assets/logo-cube.png" alt="">The Canon</a>
-  <span class="meta">Sun, Nov 1 · Studio Bell, Calgary</span>
+  <span class="meta">Sun, Nov 15 · Werklund Centre, Calgary</span>
   <a class="btn rsvp" href="https://wygo.world/the-canon-event" target="_blank" rel="noopener">RSVP</a>
 </nav>
 <header class="hero wrap" id="top">
  <div class="c-hero">
   <div class="c-copy">
     <h1 class="c-big">The <span class="y w">greatest</span><br>gathering<br>of <span class="y">makers</span><br>in <span class="y">Calgary</span></h1>
-    <p class="c-blurb">Painters, founders, filmmakers, musicians, designers and small business owners. One night, one room, everything Calgary made this year.</p>
+    <p class="c-blurb">Painters, founders, filmmakers, musicians, designers and small business owners. One day, one building, everything Calgary made this year.</p>
     <div class="c-ctas">
       <a class="c-btn" href="https://wygo.world/the-canon-event" target="_blank" rel="noopener">RSVP</a>
       <a class="c-btn o" href="https://tally.so/r/b50eYZ" target="_blank" rel="noopener">Show your work</a>
@@ -417,7 +466,7 @@ html,body{overflow-x:clip}
         <dl class="addr">
           <dt>From:</dt><dd><span>The Archive</span><br><span>Ascend Calgary</span><br>so.social.collective</dd>
           <dt>To:</dt><dd><span>You!</span></dd>
-          <dt>When</dt><dd><span>Sun, Nov 1 · Studio Bell</span></dd>
+          <dt>When</dt><dd><span>Sun, Nov 15 · Werklund Centre</span></dd>
         </dl>
         <p class="brewing">Something wild has been brewing in Calgary…</p>
       </div>
@@ -426,15 +475,15 @@ html,body{overflow-x:clip}
   </section>
   <section class="invite wrap">
     <p class="lead">Every big story has a night where it started to feel possible.</p>
-    <div class="story"><p>Calgary is full of people making things quietly, in bedrooms, basements and studios. On November 1, all of it comes into one room, with the people who made it standing right beside it.</p></div>
+    <div class="story"><p>Calgary is full of people making things quietly, in bedrooms, basements and studios. On November 15, all of it comes into one building, with the people who made it standing right beside it.</p></div>
   </section>
 
   <section class="x-sec x-expect wrap">
     <div class="x-in">
       <h2 class="x-h">What to expect</h2>
       <div class="nums">
-        <div class="num"><b>3</b>acts in one day</div><div class="num"><b>3</b>spaces inside Studio Bell</div>
-        <div class="num"><b>10</b>short films</div><div class="num"><b>264</b>seats in the Performance Hall</div>
+        <div class="num"><b>100+</b>people already attending</div><div class="num"><b>10</b>short films premiering</div>
+        <div class="num"><b>3</b>acts in one day</div><div class="num"><b>$2,000</b>to fund the films’ next chapter</div>
       </div>
     </div>
   </section>
@@ -446,7 +495,7 @@ html,body{overflow-x:clip}
           <div class="step"><i>1</i><b>Apply</b><p>Tell us what you made. Takes 5 minutes.</p></div>
           <div class="step"><i>2</i><b>We review</b><p>Replies within 1 week.</p></div>
           <div class="step"><i>3</i><b>Get your spot</b><p>A table, a screen slot or a seat.</p></div>
-          <div class="step"><i>4</i><b>Show up</b><p>Load in from 12 to 2 PM on the day.</p></div>
+          <div class="step"><i>4</i><b>Show up</b><p>We send load-in times once you’re in.</p></div>
         </div>
         <div>
           <h3 class="x-sub">What you get</h3>
@@ -459,67 +508,54 @@ html,body{overflow-x:clip}
   <section class="acts wrap" id="acts">
     <div class="inner">
       <div class="tl-wrap">
-        <h2 class="x-h">How the night unfolds</h2>
+        <h2 class="x-h">How the day unfolds</h2>
         <div class="timeline">
-          <div class="slot"><time>2:00 PM</time><b>Doors + night market</b><p>Local makers and vendors in the Soundscapes Gallery, until 5:45.</p></div>
-          <div class="slot"><time>4:00 PM</time><b>The Dinner</b><p>Invite-only sponsor dinner, off-site at House 831.</p></div>
-          <div class="slot"><time>6:00 PM</time><b>Red carpet</b><p>Arrivals at the north doors on 4 St SE.</p></div>
-          <div class="slot"><time>6:30 PM</time><b>Film festival</b><p>Ten short films in the Performance Hall, plus the Sidequest Fund announcement.</p></div>
+          <div class="slot"><time>11:00 AM</time><b>Doors + The Gathering Market</b><p>Makers, local brands and music in the Jack Singer Concert Hall lobby, until 5:00.</p></div>
+          <div class="slot"><time>6:15 PM</time><b>The Film Festival</b><p>Ten short films in the Engineered Air Theatre, until 9:00.</p></div>
+          <div class="slot"><time>4:00 PM</time><b>The Dinner</b><p>A private, invite-only dinner at Werklund Centre, until 5:30.</p></div>
         </div>
       </div>
+    </div>
+  </section>
+  <section class="acts-light wrap" id="three-acts">
+    <div class="inner">
       <div class="acts-head">
-        <h2>Three Acts. One Night.</h2>
+        <h2>Three Acts. One Day.</h2>
       </div>
-      <div class="cabinet" role="tablist" aria-label="The three acts">
-
-        <article class="folder f-red" id="f-red" data-pos="2">
-          <button class="tab" role="tab" id="tab-red" aria-controls="f-red" aria-selected="false"><span class="full">ACT III: THE DINNER</span><span class="short">ACT III</span></button>
-          <div class="body" role="tabpanel" aria-labelledby="tab-red">
-            <figure class="polaroid">
-              <img class="deco tape" src="assets/tape-small.png" alt="">
-              <img class="photo" src="assets/photo-dinner.jpg" alt="Hands reaching across a dinner table set with plates and drinks" loading="lazy">
-              <figcaption>Around 35 seats</figcaption>
-            </figure>
+      <div class="acc">
+        <details class="act" open>
+          <summary><span class="rn">Act I</span><span class="ttl">The Gathering</span><span class="tm">11:00 AM – 5:00 PM</span><span class="tg" aria-hidden="true"></span></summary>
+          <div class="act-body">
+            <img class="photo" src="assets/act-gathering.webp" alt="An overhead shot of a crowded courtyard around a DJ booth at night" loading="lazy">
             <div class="text">
-              <h3>THE DINNER</h3>
-              <p class="desc">An invite-only dinner for about 35, before the films. We seat makers next to the people who can back their next thing, whether that's a gallery, a label, a fund or a collaborator.</p>
-              <dl class="info"><dt>When:</dt><dd>4:00 – 5:45 PM</dd><dt>Where:</dt><dd>House 831 (off-site)</dd><dt>Access:</dt><dd>Invite only</dd></dl>
+              <p class="desc">A market for everything Calgary made this year. Painters, founders, musicians, filmmakers, small business owners and everyone in between set up a table and show their work to anyone who walks in.</p>
+              <p class="desc">Meet the people behind the projects, find local brands and music, and get a first look at how big Calgary’s scene really is.</p>
+              <dl class="info"><dt>Time</dt><dd>11:00 AM – 5:00 PM</dd><dt>Venue</dt><dd>Jack Singer Concert Hall Lobby</dd><dt>Location</dt><dd>Werklund Centre, Downtown Calgary</dd><dt>Access</dt><dd>RSVP required</dd></dl>
             </div>
           </div>
-        </article>
-
-        <article class="folder f-green" id="f-green" data-pos="1">
-          <button class="tab" role="tab" id="tab-green" aria-controls="f-green" aria-selected="false"><span class="full">ACT II: THE SCREENING</span><span class="short">ACT II</span></button>
-          <div class="body" role="tabpanel" aria-labelledby="tab-green">
-            <figure class="polaroid">
-              <img class="deco binder" src="assets/binderclip.png" alt="">
-              <img class="photo" src="assets/photo-screening.jpg" alt="A cinema audience wearing colourful 3D glasses" loading="lazy">
-              <figcaption>Ten films + one screen</figcaption>
-            </figure>
+        </details>
+        <details class="act">
+          <summary><span class="rn">Act II</span><span class="ttl">The Film Festival</span><span class="tm">6:15 PM – 9:00 PM</span><span class="tg" aria-hidden="true"></span></summary>
+          <div class="act-body">
+            <img class="photo" src="assets/act-screening.webp" alt="A packed theatre watching The Canon Event title on screen" loading="lazy">
             <div class="text">
-              <h3>THE SCREENING</h3>
-              <p class="desc">Ten short films about people who made something real this year, screened together on one big screen. Covered live by 100+ creators, with the winners funded to keep telling their story.</p>
-              <dl class="info"><dt>When:</dt><dd>6:30 – 8:15 PM</dd><dt>Where:</dt><dd>Performance Hall</dd><dt>Seats:</dt><dd>264</dd></dl>
+              <p class="desc">Ten short films about the people behind Calgary’s creative work: why they started, what they care about, and how an idea turned into something real.</p>
+              <p class="desc">One screen, one room, and a chance to hear their stories and see what happens when people decide to go for it.</p>
+              <dl class="info"><dt>Time</dt><dd>6:15 PM – 9:00 PM</dd><dt>Venue</dt><dd>Engineered Air Theatre</dd><dt>Location</dt><dd>Werklund Centre, Downtown Calgary</dd><dt>Access</dt><dd>RSVP required</dd></dl>
             </div>
           </div>
-        </article>
-
-        <article class="folder f-yellow" id="f-yellow" data-pos="0">
-          <button class="tab" role="tab" id="tab-yellow" aria-controls="f-yellow" aria-selected="true"><span class="full">ACT I: THE GATHERING</span><span class="short">ACT I</span></button>
-          <div class="body" role="tabpanel" aria-labelledby="tab-yellow">
-            <figure class="polaroid">
-              <img class="deco clip" src="assets/paperclip.png" alt="">
-              <img class="photo" src="assets/photo-gathering.jpg" alt="A crowded indoor market hall full of people and maker booths">
-              <figcaption>The whole city. One market</figcaption>
-            </figure>
+        </details>
+        <details class="act">
+          <summary><span class="rn">Act III</span><span class="ttl">The Dinner</span><span class="tm">4:00 PM – 5:30 PM</span><span class="tg" aria-hidden="true"></span></summary>
+          <div class="act-body">
+            <img class="photo" src="assets/act-dinner.webp" alt="A long candlelit dinner table full of guests" loading="lazy">
             <div class="text">
-              <h3>THE GATHERING</h3>
-              <p class="desc">A market for everything Calgary made this year. Painters, founders, musicians, filmmakers, small business owners and everyone in between set up a table and show their work to anyone who walks in. It’s the most open part of the night, and the first look for people who didn’t know Calgary had a scene this big.</p>
-              <dl class="info"><dt>When:</dt><dd>2:00 – 5:45 PM</dd><dt>Where:</dt><dd>Soundscapes Gallery</dd><dt>Access:</dt><dd>RSVP required</dd></dl>
+              <p class="desc">An intimate, private dinner for a curated group of makers, founders and investors.</p>
+              <p class="desc">We seat people who are building things next to the people who can back their next one, whether that’s a gallery, a label, a fund or a collaborator.</p>
+              <dl class="info"><dt>Time</dt><dd>4:00 PM – 5:30 PM</dd><dt>Location</dt><dd>Werklund Centre, Downtown Calgary</dd><dt>Access</dt><dd>Private, invite only</dd></dl>
             </div>
           </div>
-        </article>
-
+        </details>
       </div>
     </div>
   </section>
@@ -528,10 +564,10 @@ html,body{overflow-x:clip}
     <div class="wrap"><div class="room-inner faq">
       <h2 class="x-h">Questions</h2>
       <details open><summary>Do I need a finished project to show?</summary><p>No. Works in progress are welcome.</p></details>
-      <details><summary>Where is it?</summary><p>Studio Bell, National Music Centre, 850 4 St SE, Calgary. Come in through the north doors on 4 Street, beside the NMC Café.</p></details>
-      <details><summary>Which parts can I attend?</summary><p>The night market and the film festival are open with an RSVP. The dinner is invite only.</p></details>
+      <details><summary>Where is it?</summary><p>Werklund Centre in downtown Calgary. The market is in the Jack Singer Concert Hall lobby and the films are in the Engineered Air Theatre.</p></details>
+      <details><summary>Which parts can I attend?</summary><p>The Gathering Market and the Film Festival are open with an RSVP. The dinner is invite only.</p></details>
       <details><summary>Can I bring a friend?</summary><p>Yes. Each person should RSVP so we can plan for the room.</p></details>
-      <details><summary>Can I sell things at the market?</summary><p>Yes. Vendors set up in the Soundscapes Gallery. Food must be prepacked, with no open food stations.</p></details>
+      <details><summary>Can I sell things at the market?</summary><p>Yes. Vendors set up in the Jack Singer Concert Hall lobby. Apply through “Show your work” to get a table.</p></details>
       <details><summary>Is there an age limit?</summary><p>To be confirmed.</p></details>
       <details><summary>What should I wear?</summary><p>Whatever you would wear to a gallery opening.</p></details>
       <details><summary>I'm not in tech. Is this for me?</summary><p>Yes. Painters, filmmakers, musicians, designers and small business owners are exactly who this is for.</p></details>
@@ -574,53 +610,12 @@ html,body{overflow-x:clip}
   set('1'); btns.forEach(b => b.onclick = () => set(b.dataset.v));
 })();
 </script>
-<script>
-(() => {
-  const folders = [...document.querySelectorAll('.folder')];
-  // stack order, front first
-  let order = ['f-yellow','f-green','f-red'];
-  function render(pulled){
-    order.forEach((id,i) => {
-      const f = document.getElementById(id);
-      f.dataset.pos = i;
-      f.style.zIndex = 10 - i;
-      f.querySelector('.body').setAttribute('aria-hidden', i === 0 ? 'false' : 'true');
-      const t = f.querySelector('.tab');
-      t.setAttribute('aria-selected', i === 0);
-      t.tabIndex = i === 0 ? 0 : -1;
-      // tabs must stay clickable even when the folder is behind
-      t.style.zIndex = 20;
-    });
-    if (pulled){
-      const f = document.getElementById(pulled);
-      f.classList.remove('pull'); void f.offsetWidth; f.classList.add('pull');
-    }
-  }
-  function open(id, focus){
-    if (order[0] === id) return;
-    order = [id, ...order.filter(x => x !== id)];
-    render(id);
-    if (focus) document.getElementById(id).querySelector('.tab').focus();
-  }
-  const ids = ['f-yellow','f-green','f-red'];
-  folders.forEach(f => {
-    const t = f.querySelector('.tab');
-    t.addEventListener('click', () => open(f.id));
-    t.addEventListener('keydown', e => {
-      const i = ids.indexOf(f.id);
-      if (e.key === 'ArrowRight'){ e.preventDefault(); open(ids[(i+1)%3], true); }
-      if (e.key === 'ArrowLeft'){ e.preventDefault(); open(ids[(i+2)%3], true); }
-    });
-  });
-  render();
-})();
-</script>
 
 <script>
 (() => {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
   // Only things below the first screen fade in, so the page is never blank when it opens.
-  const els = document.querySelectorAll('.invite .lead, .invite .story, .x-sec .x-h, .nums, .split, .tl-wrap, .acts-head, .cabinet, .faq, .beams, footer .inner');
+  const els = document.querySelectorAll('.invite .lead, .invite .story, .x-sec .x-h, .nums, .split, .tl-wrap, .acts-head, .acc, .faq, .beams, footer .inner');
   const io = new IntersectionObserver(entries => entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
   }), { rootMargin: '0px 0px -8% 0px' });
