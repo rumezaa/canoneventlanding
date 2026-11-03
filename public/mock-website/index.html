@@ -295,8 +295,8 @@ html,body{overflow-x:clip}
 .c-big{font-size:clamp(56px,10.5vw,168px)}
 .pc-sec{padding-block:clamp(64px,8vw,110px) 0}
 .pc-sec .postcard{max-width:900px;transform:rotate(-1.5deg);filter:drop-shadow(0 22px 34px rgba(41,17,0,.28)) drop-shadow(0 2px 3px rgba(41,17,0,.25))}
-.pc-sec .postcard .paper{background-color:#d6c9a6;background-blend-mode:multiply}
-.pc-sec .postcard .paper::after{content:"";position:absolute;inset:0;background:rgba(196,154,80,.18);mix-blend-mode:multiply;pointer-events:none}
+.pc-sec .postcard .paper{background-color:#f1ece0;background-blend-mode:multiply}
+.pc-sec .postcard .paper::after{content:"";position:absolute;inset:0;background:rgba(252,249,241,.5);mix-blend-mode:normal;pointer-events:none}
 .pc-sec .postcard .paper>*{position:relative;z-index:1}
 .invite{padding-top:clamp(56px,7vw,100px)!important}
 
@@ -347,8 +347,8 @@ html,body{overflow-x:clip}
 
 /* review round 1 */
 .c-big .w{transform:skewY(-3deg) scaleY(1.1) translateY(.07em);transform-origin:center bottom;translate:-.13em -.065em}
-.pc-sec .postcard .paper{background-color:#efe8d6!important}
-.pc-sec .postcard .paper::after{background:rgba(196,154,80,.07)!important}
+.pc-sec .postcard .paper{background-color:#faf6ec!important}
+.pc-sec .postcard .paper::after{background:rgba(252,249,242,.42)!important;mix-blend-mode:normal!important}
 .invite{display:block!important;text-align:center!important;max-width:820px!important;padding-top:clamp(48px,6vw,80px)!important}
 .invite .lead{font:clamp(28px,3.4vw,48px)/1.1 var(--display)!important;margin:0 auto 20px!important;max-width:760px}
 .invite .story{text-align:center!important;max-width:600px!important;margin:0 auto!important;font-size:18px!important;line-height:1.6!important}
@@ -377,6 +377,9 @@ html,body{overflow-x:clip}
 
 @media (prefers-reduced-motion:reduce){.marq .t{animation:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* postcard: mascot sticker replaces the plain cube */
+.pc-left .cube.sticker{width:23cqw;height:auto;max-width:100%;opacity:1;transform:rotate(-5deg);filter:drop-shadow(0 .8cqw 1.2cqw rgba(41,17,0,.28)) drop-shadow(0 .1cqw .2cqw rgba(41,17,0,.3));align-self:center;margin-top:-1cqw}
 </style>
 
 
@@ -397,10 +400,8 @@ html,body{overflow-x:clip}
       <a class="c-btn o" href="https://tally.so/r/b50eYZ" target="_blank" rel="noopener">Show your work</a>
     </div>
   </div>
-
  </div>
 </header>
-<div class="marq" aria-hidden="true"><div class="t"><span>Painters</span>✦<span>Founders</span>✦<span>Filmmakers</span>✦<span>Musicians</span>✦<span>Designers</span>✦<span>Business owners</span>✦<span>Writers</span>✦<span>Builders</span>✦<span>Dreamers</span>✦<span>Painters</span>✦<span>Founders</span>✦<span>Filmmakers</span>✦<span>Musicians</span>✦<span>Designers</span>✦<span>Business owners</span>✦<span>Writers</span>✦<span>Builders</span>✦<span>Dreamers</span>✦</div></div>
 
 <main>
   <section class="pc-sec wrap">
@@ -409,7 +410,7 @@ html,body{overflow-x:clip}
     <div class="paper">
       <div class="pc-left">
         <p class="hello">You’re invited!</p>
-        <img class="cube" src="assets/logo-cube-grad.png" alt="The Canon">
+        <img class="cube sticker" src="assets/canon-sticker.webp" width="796" height="1287" alt="The Canon">
       </div>
       <div class="divider" aria-hidden="true"></div>
       <div class="pc-right">
