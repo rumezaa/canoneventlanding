@@ -25,7 +25,7 @@ const acts: Act[] = [
     numeral: "I",
     act: "ACT I",
     title: "The Gathering Market",
-    time: "11:00 AM – 5:00 PM",
+    time: "2:00 PM – 5:00 PM",
     still: "/assets/stills/gathering.webp",
     alt: "An overhead shot of a crowded courtyard around a DJ booth at night.",
     body: [
