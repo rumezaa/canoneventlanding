@@ -20,6 +20,8 @@ const sponsors: Sponsor[] = [
   },
   { name: "Aurrin Ventures", logo: "/assets/sponsors/aurrin-ventures.webp", ratio: 310 / 261, scale: 1.7 },
   { name: "Red Bull", logo: "/assets/sponsors/red-bull.svg", ratio: 1686 / 408, scale: 0.8, url: "https://www.redbull.com" },
+  { name: "QA.AI", logo: "/assets/sponsors/qa-ai.webp", ratio: 519 / 232, scale: 1.2 },
+  { name: "Struggle Is Your Success (SIYS)", logo: "/assets/sponsors/siys.webp", ratio: 275 / 91, scale: 1.35 },
 ];
 
 export default function Sponsors() {
